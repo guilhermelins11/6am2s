@@ -1,5 +1,3 @@
-// frontend/src/app/page.js
-
 "use client";
 
 import { useState } from 'react';
@@ -11,24 +9,20 @@ export default function HomePage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     
-    // Conectando com o back-end do FastAPI
     try {
-      // 1. Envie o palpite do jogador para o FastAPI
       const response = await fetch('http://127.0.0.1:8000/guess', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Corrigido para minúsculas, por convenção
+          'Content-Type': 'application/json', 
         },
         body: JSON.stringify({ palpite: palpite }),
       });
       
       const data = await response.json();
 
-      // 2. Atualize a mensagem com a resposta do FastAPI
       setMensagem(data.mensagem);
       
     } catch (error) {
-      // Este bloco só é executado se houver um erro de conexão
       setMensagem('Erro: Não foi possível conectar ao servidor.');
     }
 
